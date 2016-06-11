@@ -1,0 +1,44 @@
+.top_rect { 
+	background-color: black;
+	position: fixed;
+	height: 3em;
+	width: 100%;
+	left: 0%;
+	top: 0%;
+	position:fixed;
+	text-align: center;
+	overflow: hidden;
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+div.title_pos {
+	top: 0%;
+	left: 1%;
+	position:fixed;
+	text-align: left;  
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+div.filename_pos {
+	top: 0%;
+	left: 15.5%;
+	position:fixed;
+	text-align: left;
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+div.clock_pos {
+	top: 0%;
+	right: 1%;
+	position:fixed;
+	text-align: right;  
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+}
