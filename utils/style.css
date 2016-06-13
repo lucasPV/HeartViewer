@@ -42,3 +42,8 @@ div.clock_pos {
 	vertical-align: middle;
 	font-size: 15px;
 }
+
+img {
+  width:  920px;
+  height: auto;
+}
