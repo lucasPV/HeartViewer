@@ -33,7 +33,7 @@ buttonFillColor      = '#C0C0C0'
 buttonFontColor      = '#000000'
 fontSize             = '3'
 selectionDir         = '/media/Dados/Manga/' 	#default directory on gui file selection
-appVersion           = 'v5.4'
+appVersion           = 'v5.5'
 copyright            = '2016 Heart Viewer'
 smartSorting         = True						#sort considering the numbers in the names
 showHeader           = True
@@ -63,7 +63,7 @@ def normalizePath(string): #This is necessary for Windows compatibility
 def getFiles(fileList, path):
 	listTmp = mySorted(os.listdir(path))
 	for file in listTmp:
-	    if file.endswith(imgExtensions):
+	    if file.lower().endswith(imgExtensions):
 	        fileList.append(file)
 
 
@@ -167,13 +167,13 @@ def fillHtmlFileEnd(output):
 def unzipImgs(filename, path):
 	with zipfile.ZipFile(filename, 'r') as zf:
 		for file in zf.namelist():
-			if file.endswith(imgExtensions):
+			if file.lower().endswith(imgExtensions):
 				zf.extract(file, path)
 
 def unrarImgs(filename, path):
 	with rarfile.RarFile(filename, 'r') as rf:
 		for file in rf.namelist():
-			if file.endswith(imgExtensions):
+			if file.lower().endswith(imgExtensions):
 				rf.extract(file, path)
 
 def extractFile(filename, path):
@@ -189,11 +189,11 @@ def extractFiles(window, fileDict, progressBar):
 		fileDict[filename] = (path, pathToExtract)
 		try:
 			os.makedirs(pathToExtract)
-			if filename.endswith(('.zip', '.rar')):
+			if filename.lower().endswith(('.zip', '.rar')):
 				try:
-					if filename.endswith('.zip'):
+					if filename.lower().endswith('.zip'):
 						unzipImgs(fullPath, pathToExtract)
-					elif filename.endswith('.rar'):
+					elif filename.lower().endswith('.rar'):
 						unrarImgs(fullPath, pathToExtract)
 				except:
 					shutil.rmtree(pathToExtract)
@@ -251,14 +251,14 @@ if __name__ == "__main__":
 	compressedFiles = True
 	if len(fileDict) == 1:
 		for filename in fileDict:
-			if not (filename.endswith(compressedExtensions + imgExtensions)):
+			if not (filename.lower().endswith(compressedExtensions + imgExtensions)):
 				messagebox.showinfo("Error", "This file is not an image or compressed file!")
 				exit(1)
-			if filename.endswith(imgExtensions):
+			if filename.lower().endswith(imgExtensions):
 				compressedFiles = False
 	else:
 		for filename in fileDict:
-			if not filename.endswith(compressedExtensions):
+			if not filename.lower().endswith(compressedExtensions):
 				messagebox.showinfo("Error", "Multiple selection supports only compressed files!")
 				exit(1)
 
@@ -322,7 +322,7 @@ if __name__ == "__main__":
 				if "__MACOSX" in directory:
 					continue
 				for file in os.listdir(directory):
-					if file.endswith(imgExtensions):
+					if file.lower().endswith(imgExtensions):
 						imgDirs.append(directory)
 						break
 
