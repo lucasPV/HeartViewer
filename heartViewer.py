@@ -105,7 +105,7 @@ def fillHtmlImgs(output, imgs, path):
 	total = len(imgs)
 	i = 1
 	print('<a name="top"></a>', file=output)
-	print('<div class="manga" align="center">', file=output)
+	print('<div class="manga" id="manga" align="center">', file=output)
 	for file in imgs:
 		print('<a name="' + str(i) + '"></a>', file=output)
 		print('<a name="'+ file + '"></a>', file=output)
@@ -153,6 +153,7 @@ def addAlbumButtons(output, prv, nxt):
 
 
 def fillHtmlFileEnd(output):
+	print('<script>adjustImgs();</script>', file=output)
 	print('<center><form>', file=output)
 	print('<input style="width: 180px; padding: 10px; box-shaddow: 6px 6px 5px; #999999; -webkit-box-shadow: 6px 6px 5px #999999; -moz-box-shadow: 6px 6px 5px #999999; font-weight: bold; background: ' + buttonFillColor + '; color: ' + buttonFontColor + '; cursor: pointer; border-radius: 10px; border: 1px solid #D9D9D9; font-size: 100%;" type="button" value="Back to the top" onclick="window.location.href=' + "'#top'" + '" />', file=output)
 	print('<small><aside><br/><br/>&copy;' + copyright + ' ' + appVersion + '</aside></small>', file=output)

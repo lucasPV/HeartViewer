@@ -55,8 +55,7 @@ function startTime() {
 	var h = today.getHours();
 	var m = today.getMinutes();
 	m = checkTime(m);
-	document.getElementById('txt').innerHTML =
-	d + " " + h + ":" + m;
+	document.getElementById('txt').innerHTML = d + " " + h + ":" + m;
 	var t = setTimeout(startTime, 500);
 }
 
@@ -88,4 +87,41 @@ function toggleFullscreen(elem) {
 			document.webkitExitFullscreen();
 		}
 	}
+}
+
+function adjustImgs() {
+	var images = document.getElementById("manga").getElementsByTagName("img");
+	for (var i = 0; i < images.length; i++) {
+		images[i].style.width = 850;
+	}
+}
+
+function incImgsSize() {
+	var tmp = window.pageYOffset/document.body.scrollHeight;
+
+	var images = document.getElementById("manga").getElementsByTagName("img");
+	for (var i = 0; i < images.length; i++) {
+		var width = parseInt(images[i].style.width.replace("px", ""));
+		if (width >= 1650) {
+			break;
+		}
+		images[i].style.width = width + 50;
+	}
+
+	window.scrollTo(0, document.body.scrollHeight*tmp);
+}
+
+function decImgsSize() {
+	var tmp = window.pageYOffset/document.body.scrollHeight;
+
+	var images = document.getElementById("manga").getElementsByTagName("img");
+	for (var i = 0; i < images.length; i++) {
+		var width = parseInt(images[i].style.width.replace("px", ""));
+		if (width <= 550) {
+			break;
+		}
+		images[i].style.width = width - 50;
+	}
+
+	window.scrollTo(0, document.body.scrollHeight*tmp);
 }
