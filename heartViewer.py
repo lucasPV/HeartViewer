@@ -50,6 +50,7 @@ storeDataDir  = 'tmp'
 extractionDir = os.path.join(storeDataDir, 'extractions') #tmp/extractions
 indexPageName = 'index.html'
 iconPath      = os.path.join('icon', 'icon.png')
+heartPath     = os.path.join('icon', 'heart.png')
 cssPath       = os.path.join('utils', 'style.css')
 jsPath        = os.path.join('utils', 'script.js')
 
@@ -68,8 +69,8 @@ def getFiles(fileList, path):
 
 
 def fillHtmlHeader(output, name, imgs):
-	if (len(name) > 35):
-		name = '...' + name[-35:]
+	if (len(name) > 30):
+		name = '...' + name[-30:]
 
 	total = len(imgs)
 
@@ -86,7 +87,8 @@ def fillHtmlHeader(output, name, imgs):
 	print('<b>\n', file=output)
 	if showHeader:
 		print('<div class="top_rect">', file=output)
-		print('<div class="title_pos">' + pageTitle + ' ' + appVersion + '</div>', file=output)
+		print('<div class="title_pos"><img align=center src="file://' + os.path.join(realPath, heartPath) + '">', file=output)
+		print(pageTitle + ' ' + appVersion + '</div>' , file=output)
 		print('<div class="filename_pos"><i><small>"' + name + '"</small></i></div>', file=output)
 		print('Img:', file=output)
 		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" id="ref" style="width:58px;height:30px"/>', file=output)
@@ -111,7 +113,7 @@ def fillHtmlImgs(output, imgs, path):
 			print('<a name="'+ file + '"></a>', file=output)
 		if showHeader and i == 1:
 			print('<br/><br/>', file=output)
-		print('\t<img id="img' + str(i) + '"src="file://' + path + '/' + file + '">', file=output)
+		print('\t<img id="img' + str(i) + '" src="file://' + path + '/' + file + '">', file=output)
 		print('\t<p>[' + str(i) + '/' + str(total) + ']</p>', file=output)
 		print('<br/>', file=output)
 		i += 1
