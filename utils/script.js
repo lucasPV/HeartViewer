@@ -76,7 +76,7 @@ function toggleFullscreen(elem) {
 function adjustImgs() {
 	var images = document.getElementById("manga").getElementsByTagName("img");
 	for (var i = 0; i < images.length; i++) {
-		images[i].style.width = 850;
+		images[i].style.width = 1000;
 	}
 }
 
@@ -86,10 +86,10 @@ function incImgsSize() {
 	var images = document.getElementById("manga").getElementsByTagName("img");
 	for (var i = 0; i < images.length; i++) {
 		var width = parseInt(images[i].style.width.replace("px", ""));
-		if (width >= 1650) {
+		if (width >= 1800) {
 			break;
 		}
-		images[i].style.width = width + 50;
+		images[i].style.width = width + 100;
 	}
 
 	window.scrollTo(0, document.body.scrollHeight*tmp);
@@ -101,10 +101,10 @@ function decImgsSize() {
 	var images = document.getElementById("manga").getElementsByTagName("img");
 	for (var i = 0; i < images.length; i++) {
 		var width = parseInt(images[i].style.width.replace("px", ""));
-		if (width <= 550) {
+		if (width <= 500) {
 			break;
 		}
-		images[i].style.width = width - 50;
+		images[i].style.width = width - 100;
 	}
 
 	window.scrollTo(0, document.body.scrollHeight*tmp);

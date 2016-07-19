@@ -33,7 +33,7 @@ buttonFillColor      = '#C0C0C0'
 buttonFontColor      = '#000000'
 fontSize             = '3'
 selectionDir         = '/media/Dados/Manga/' 	#default directory on gui file selection
-appVersion           = 'v5.5'
+appVersion           = 'v6.0'
 copyright            = '2016 Heart Viewer'
 smartSorting         = True						#sort considering the numbers in the names
 showHeader           = True
@@ -51,6 +51,10 @@ extractionDir = os.path.join(storeDataDir, 'extractions') #tmp/extractions
 indexPageName = 'index.html'
 iconPath      = os.path.join('icon', 'icon.png')
 heartPath     = os.path.join('icon', 'heart.png')
+imagePath     = os.path.join('icon', 'image.png')
+albumPath     = os.path.join('icon', 'albums.png')
+glassPath     = os.path.join('icon', 'glass.png')
+folderPath    = os.path.join('icon', 'folder.png')
 cssPath       = os.path.join('utils', 'style.css')
 jsPath        = os.path.join('utils', 'script.js')
 
@@ -69,8 +73,7 @@ def getFiles(fileList, path):
 
 
 def fillHtmlHeader(output, name, imgs):
-	if (len(name) > 30):
-		name = '...' + name[-30:]
+	name = "'" + name + "'";
 
 	total = len(imgs)
 
@@ -89,16 +92,21 @@ def fillHtmlHeader(output, name, imgs):
 		print('<div class="top_rect">', file=output)
 		print('<div class="title_pos"><img align=center src="file://' + os.path.join(realPath, heartPath) + '">', file=output)
 		print(pageTitle + ' ' + appVersion + '</div>' , file=output)
-		print('<div class="filename_pos"><i><small>"' + name + '"</small></i></div>', file=output)
-		print('Img:', file=output)
+		print('<div class="filename_pos"><img align=center src="file://' + os.path.join(realPath, folderPath) + '">', file=output)
+		print('<input type=button onClick="alert(' + name + ');" value="Info"></div>', file=output)
+		print('<img align=center src="file://' + os.path.join(realPath, imagePath) + '">', file=output)
 		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" id="ref" style="width:58px;height:30px"/>', file=output)
 		print('/' + str(total), file=output)
 		print('<body onload="startTime()">', file=output)
 		print('<div class="clock_pos" id="txt"></div>', file=output)
+		print('<div class="zoom_pos"> <img align=center src="file://' + os.path.join(realPath, glassPath) + '">', file=output)
+		print("<input type=button onClick='decImgsSize();' value='-'>", file=output)
+		print("<input type=button onClick='incImgsSize();' value='+'></div>", file=output)
 		if compressedFiles:
 			pathToAlbum = os.path.join(tmpDir, indexPageName)
 			pathToAlbum = normalizePath(pathToAlbum)
-			print("<input type=button onClick=""location.href='file://" + pathToAlbum + "'"" value='Albums'>", file=output)
+			print('<div class="album_pos"> <img align=center src="file://' + os.path.join(realPath, albumPath) + '">', file=output)
+			print("<input type=button onClick=""location.href='file://" + pathToAlbum + "'"" value='Albums'></div>", file=output)
 		print('</div>', file=output)
 
 

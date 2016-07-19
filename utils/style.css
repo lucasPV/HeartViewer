@@ -25,7 +25,7 @@ div.title_pos {
 
 div.filename_pos {
 	top: 0%;
-	left: 20%;
+	left: 25.5%;
 	position:fixed;
 	text-align: left;
 	line-height: 3em;
@@ -38,6 +38,26 @@ div.clock_pos {
 	right: 1%;
 	position:fixed;
 	text-align: right;  
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+div.album_pos {
+	top: 0%;
+	right: 27%;
+	position:fixed;
+	text-align: right;
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+div.zoom_pos {
+	top: 0%;
+	right: 11%;
+	position:fixed;
+	text-align: right;
 	line-height: 3em;
 	vertical-align: middle;
 	font-size: 15px;
