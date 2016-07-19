@@ -108,7 +108,8 @@ def fillHtmlImgs(output, imgs, path):
 	print('<div class="manga" id="manga" align="center">', file=output)
 	for file in imgs:
 		print('<a name="' + str(i) + '"></a>', file=output)
-		print('<a name="'+ file + '"></a>', file=output)
+		if not compressedFiles:
+			print('<a name="'+ file + '"></a>', file=output)
 		if showHeader and i == 1:
 			print('<br/><br/>', file=output)
 		print('\t<img id="img' + str(i) + '"src="file://' + path + '/' + file + '">', file=output)
