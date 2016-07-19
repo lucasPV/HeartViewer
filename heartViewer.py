@@ -89,9 +89,8 @@ def fillHtmlHeader(output, name, imgs):
 		print('<div class="title_pos">' + pageTitle + ' ' + appVersion + '</div>', file=output)
 		print('<div class="filename_pos"><i><small>"' + name + '"</small></i></div>', file=output)
 		print('Img:', file=output)
-		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpEnter(event,' + str(total) + ')" id="ref" style="width:58px;height:30px"/>', file=output)
+		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" id="ref" style="width:58px;height:30px"/>', file=output)
 		print('/' + str(total), file=output)
-		print('<input type="button" value="Go" onclick="jumpButton(' + str(total) +  ')" />', file=output)
 		print('<body onload="startTime()">', file=output)
 		print('<div class="clock_pos" id="txt"></div>', file=output)
 		if compressedFiles:

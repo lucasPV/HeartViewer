@@ -6,7 +6,7 @@ function adjustScroll() {
 	window.scrollTo(left, top-45);
 }
 
-function jumpEnter(event, total) {
+function jumpToImg(event, total) {
 	if (event.which == 13 || event.keyCode == 13) {
 		var h = document.getElementById('ref').value;
 		if (h > total) {
@@ -21,22 +21,6 @@ function jumpEnter(event, total) {
 		if (h != "bottom") {
 			adjustScroll();
 		}
-	}
-}
-
-function jumpButton(total) {
-	var h = document.getElementById('ref').value;
-	if (h > total) {
-		h = "bottom";
-	} else if (!(h > 1)) {
-		h = "top";
-	}
-	var url = location.href;
-	location.href = "#" + h;
-	history.replaceState(null, null, url);
-
-	if (h != "bottom") {
-		adjustScroll();
 	}
 }
 
