@@ -95,7 +95,7 @@ def fillHtmlHeader(output, name, imgs):
 		print('<div class="title_pos"><img align=center src="file://' + os.path.join(realPath, heartPath) + '">', file=output)
 		print(pageTitle + ' ' + appVersion + '</div>' , file=output)
 		print('<div class="filename_pos"><img align=center src="file://' + os.path.join(realPath, folderPath) + '">', file=output)
-		print('<input type=button onClick="alert(' + name + ');" value="Info"></div>', file=output)
+		print('<input type=button onClick="alert(' + name + ');" value="Dir"></div>', file=output)
 		print('<img align=center src="file://' + os.path.join(realPath, imagePath) + '">', file=output)
 		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" id="ref" style="width:58px;height:30px"/>', file=output)
 		print('/' + str(total), file=output)
@@ -421,7 +421,7 @@ if __name__ == "__main__":
 		indexPage = open(os.path.join(tmpDir, pageName), 'w+')
 		imgs = []
 		getFiles(imgs, directory)
-		fillHtmlHeader(indexPage, os.path.join(fileDict[name], name), imgs)
+		fillHtmlHeader(indexPage, fileDict[name], imgs)
 		fillHtmlImgs(indexPage, imgs, directory)
 		if useZoom:
 			addZoomFeature(indexPage, imgs)
