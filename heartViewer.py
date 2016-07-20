@@ -74,7 +74,8 @@ def getFiles(fileList, path):
 
 
 def fillHtmlHeader(output, name, imgs):
-	name = "'" + name + "'";
+	name = "'" + name + "'"
+	name = name.replace('\\', '\\\\') #for windows compatibility
 
 	total = len(imgs)
 
