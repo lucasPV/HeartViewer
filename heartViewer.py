@@ -416,7 +416,7 @@ if __name__ == "__main__":
 		indexPage = open(os.path.join(tmpDir, pageName), 'w+')
 		imgs = []
 		getFiles(imgs, directory)
-		fillHtmlHeader(indexPage, name, imgs)
+		fillHtmlHeader(indexPage, os.path.join(fileDict[name], name), imgs)
 		fillHtmlImgs(indexPage, imgs, directory)
 		if useZoom:
 			addZoomFeature(indexPage, imgs)
