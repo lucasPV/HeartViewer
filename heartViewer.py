@@ -35,13 +35,14 @@ fontSize             = '3'
 selectionDir         = '/media/Dados/Manga/' 	#default directory on gui file selection
 appVersion           = 'v6.0'
 copyright            = '2016 Heart Viewer'
-smartSorting         = True						#sort considering the numbers in the names
+use7z                = True					#if you don't want to use the python extraction libs, use 7z instead (make sure you have it installed)
+smartSorting         = True					#sort considering the numbers in the names
 showHeader           = True
 useZoom              = True
-zoomCursor           = True						#shows a magnifying glass when the cursor is above an image
-useDefaultBrowser    = True						#if false, you can select the browser below
-browser              = 'firefox'				#if you are not in Linux, make sure that the browser is in the system PATH
-imgExtensions 		 = ('.png', '.jpg', '.jpeg', '.bmp', '.jpe', '.gif', '.tif')
+zoomCursor           = True					#shows a magnifying glass when the cursor is above an image
+useDefaultBrowser    = True					#if false, you can select the browser below
+browser              = 'firefox'			#if you are not in Linux, make sure that the browser is in the system PATH
+imgExtensions        = ('.png', '.jpg', '.jpeg', '.bmp', '.jpe', '.gif', '.tif')
 compressedExtensions = ('.zip', '.rar', '.7z', '.tar', '.bz2', '.gz', '.tgz', '.cbz', '.cbt', '.cbr', '.cba', '.cb7')
 
 
@@ -200,18 +201,21 @@ def extractFiles(window, fileDict, progressBar):
 		fileDict[filename] = (path, pathToExtract)
 		try:
 			os.makedirs(pathToExtract)
-			if filename.lower().endswith(('.zip', '.rar')):
-				try:
-					if filename.lower().endswith('.zip'):
-						unzipImgs(fullPath, pathToExtract)
-					elif filename.lower().endswith('.rar'):
-						unrarImgs(fullPath, pathToExtract)
-				except:
-					shutil.rmtree(pathToExtract)
-					os.makedirs(pathToExtract)
-					extractFile(fullPath, pathToExtract)
+			if use7z:
+				os.system('7z x "' + fullPath + '" -o"' + pathToExtract + '"')
 			else:
-				extractFile(fullPath, pathToExtract)
+				if filename.lower().endswith(('.zip', '.rar')):
+					try:
+						if filename.lower().endswith('.zip'):
+							unzipImgs(fullPath, pathToExtract)
+						elif filename.lower().endswith('.rar'):
+							unrarImgs(fullPath, pathToExtract)
+					except:
+						shutil.rmtree(pathToExtract)
+						os.makedirs(pathToExtract)
+						extractFile(fullPath, pathToExtract)
+				else:
+					extractFile(fullPath, pathToExtract)
 		except:
 			messagebox.showinfo("Error", "Couldn't extract file:\n" + fullPath)
 			window.quit()
