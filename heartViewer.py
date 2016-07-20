@@ -33,7 +33,7 @@ buttonFillColor      = '#C0C0C0'
 buttonFontColor      = '#000000'
 fontSize             = '3'
 selectionDir         = '/media/Dados/Manga/' 	#default directory on gui file selection
-appVersion           = 'v6.0'
+appVersion           = '6.2'
 copyright            = '2016 Heart Viewer'
 use7z                = True					#if you don't want to use the python extraction libs, use 7z instead (make sure you have it installed)
 smartSorting         = True					#sort considering the numbers in the names
@@ -55,6 +55,7 @@ heartPath     = os.path.join('icon', 'heart.png')
 imagePath     = os.path.join('icon', 'image.png')
 albumPath     = os.path.join('icon', 'albums.png')
 glassPath     = os.path.join('icon', 'glass.png')
+keyboardPath  = os.path.join('icon', 'keyboard.png')
 folderPath    = os.path.join('icon', 'folder.png')
 cssPath       = os.path.join('utils', 'style.css')
 jsPath        = os.path.join('utils', 'script.js')
@@ -92,12 +93,14 @@ def fillHtmlHeader(output, name, imgs):
 	print('<b>\n', file=output)
 	if showHeader:
 		print('<div class="top_rect">', file=output)
-		print('<div class="title_pos"><img align=center src="file://' + os.path.join(realPath, heartPath) + '">', file=output)
+		print('<div onClick="versionInfo();" class="title_pos"><img align=center src="file://' + os.path.join(realPath, heartPath) + '">', file=output)
 		print(pageTitle + ' ' + appVersion + '</div>' , file=output)
-		print('<div class="filename_pos"><img align=center src="file://' + os.path.join(realPath, folderPath) + '">', file=output)
-		print('<input type=button onClick="alert(' + name + ');" value="Dir"></div>', file=output)
+		print('<div class="keys_pos"><img align=center src="file://' + os.path.join(realPath, keyboardPath) + '">', file=output)
+		print('<input id="keys" type=button onClick="keyInfo();" value="HK"></div>', file=output)
+		print('<div class="dir_pos"><img align=center src="file://' + os.path.join(realPath, folderPath) + '">', file=output)
+		print('<input id="dir" type=button onClick="alert(' + name + ');" value="Dir"></div>', file=output)
 		print('<img align=center src="file://' + os.path.join(realPath, imagePath) + '">', file=output)
-		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" id="ref" style="width:58px;height:30px"/>', file=output)
+		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" id="ref" style="width:50px;height:30px"/>', file=output)
 		print('/' + str(total), file=output)
 		print('<body onload="startTime()">', file=output)
 		print('<div class="clock_pos" id="txt"></div>', file=output)
@@ -108,7 +111,7 @@ def fillHtmlHeader(output, name, imgs):
 			pathToAlbum = os.path.join(tmpDir, indexPageName)
 			pathToAlbum = normalizePath(pathToAlbum)
 			print('<div class="album_pos"> <img align=center src="file://' + os.path.join(realPath, albumPath) + '">', file=output)
-			print("<input type=button onClick=""location.href='file://" + pathToAlbum + "'"" value='Albums'></div>", file=output)
+			print("<input id='albums' type=button onClick=""location.href='file://" + pathToAlbum + "'"" value='Albums'></div>", file=output)
 		print('</div>', file=output)
 
 
@@ -142,6 +145,7 @@ def addZoomFeature(output, imgs):
 
 	#Add a listener to each image
 	print('\n<script>', file=output)
+	print('document.onkeypress = keyPress;', file=output)
 	i = 1
 	for file in imgs:
 		print("\ndocument.getElementById('img" + str(i) + "').addEventListener('click', function() {", file=output)
@@ -156,11 +160,11 @@ def addAlbumButtons(output, prv, nxt):
 	if prv:
 		prv = normalizePath(prv)
 		prv = "'file://" + prv + "'"
-		print('<input style="width: 180px; padding: 10px; box-shaddow: 6px 6px 5px; #999999; -webkit-box-shadow: 6px 6px 5px #999999; -moz-box-shadow: 6px 6px 5px #999999; font-weight: bold; background: ' + buttonFillColor + '; color: ' + buttonFontColor + '; cursor: pointer; border-radius: 10px; border: 1px solid #D9D9D9; font-size: 100%;" type="button" value="Prev Album" onclick="href=window.location.href=' + prv + '" />', file=output)
+		print('<input id="prev" style="width: 180px; padding: 10px; box-shaddow: 6px 6px 5px; #999999; -webkit-box-shadow: 6px 6px 5px #999999; -moz-box-shadow: 6px 6px 5px #999999; font-weight: bold; background: ' + buttonFillColor + '; color: ' + buttonFontColor + '; cursor: pointer; border-radius: 10px; border: 1px solid #D9D9D9; font-size: 100%;" type="button" value="Prev Album" onclick="href=window.location.href=' + prv + '" />', file=output)
 	if nxt:
 		nxt = normalizePath(nxt)
 		nxt = "'file://" + nxt + "'"
-		print('<input style="width: 180px; padding: 10px; box-shaddow: 6px 6px 5px; #999999; -webkit-box-shadow: 6px 6px 5px #999999; -moz-box-shadow: 6px 6px 5px #999999; font-weight: bold; background: ' + buttonFillColor + '; color: ' + buttonFontColor + '; cursor: pointer; border-radius: 10px; border: 1px solid #D9D9D9; font-size: 100%;" type="button" value="Next Album" onclick="href=window.location.href=' + nxt + '" />', file=output)
+		print('<input id="next" style="width: 180px; padding: 10px; box-shaddow: 6px 6px 5px; #999999; -webkit-box-shadow: 6px 6px 5px #999999; -moz-box-shadow: 6px 6px 5px #999999; font-weight: bold; background: ' + buttonFillColor + '; color: ' + buttonFontColor + '; cursor: pointer; border-radius: 10px; border: 1px solid #D9D9D9; font-size: 100%;" type="button" value="Next Album" onclick="href=window.location.href=' + nxt + '" />', file=output)
 	print('</form></center>', file=output)
 
 

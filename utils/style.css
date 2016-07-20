@@ -23,9 +23,19 @@ div.title_pos {
 	font-size: 15px;
 }
 
-div.filename_pos {
+div.keys_pos {
 	top: 0%;
-	left: 25.5%;
+	left: 21%;
+	position:fixed;
+	text-align: left;
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+div.dir_pos {
+	top: 0%;
+	left: 32.5%;
 	position:fixed;
 	text-align: left;
 	line-height: 3em;

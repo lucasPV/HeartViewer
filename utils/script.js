@@ -109,3 +109,46 @@ function decImgsSize() {
 
 	window.scrollTo(0, document.body.scrollHeight*tmp);
 }
+
+function keyPress(e){
+	var x = e || window.event;
+	var key = (x.keyCode || x.which);
+	switch (key) {
+		case 110: //N
+			decImgsSize();
+			break;
+		case 109: //M
+			incImgsSize();
+			break;
+		case 122: //Z
+			scrollBy(0,65);
+			break;
+		case 120: //X
+			scrollBy(0,-65);
+			break;
+		case 97:  //A
+			document.getElementById("dir").click();
+			break;
+		case 113: //Q
+			document.getElementById("albums").click();
+			break;
+		case 111: //O
+			document.getElementById("prev").click();
+			break;
+		case 112: //P
+			document.getElementById("next").click();
+			break;
+		case 105: //I
+			keyInfo();
+			break;
+	}
+}
+
+function keyInfo() {
+	alert("Hotkeys:\n\tQ - Go to Albums\n\tA - Show Directory Name\n\tO - Previous Album\n\tP - Next Album\n\tZ - Scroll Down\n\tX - Scroll Up\n\tN - Decrease Image Size\n\tM - Increase Image Size\n\tI - Show This Message");
+}
+
+function versionInfo() {
+	alert("Thanks for using Heart Viewer!\n\nAuthor: Lucas Pascotti Valem");
+}
+
