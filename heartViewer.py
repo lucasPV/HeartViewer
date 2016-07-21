@@ -33,7 +33,7 @@ buttonFillColor      = '#C0C0C0'
 buttonFontColor      = '#000000'
 fontSize             = '3'
 selectionDir         = '/media/Dados/Manga/' 	#default directory on gui file selection
-appVersion           = '6.2'
+appVersion           = '6.3'
 copyright            = '2016 Heart Viewer'
 use7z                = True					#if you don't want to use the python extraction libs, use 7z instead (make sure you have it installed)
 smartSorting         = True					#sort considering the numbers in the names
@@ -100,7 +100,7 @@ def fillHtmlHeader(output, name, imgs):
 		print('<div class="dir_pos"><img align=center src="file://' + os.path.join(realPath, folderPath) + '">', file=output)
 		print('<input id="dir" type=button onClick="alert(' + name + ');" value="Dir"></div>', file=output)
 		print('<img align=center src="file://' + os.path.join(realPath, imagePath) + '">', file=output)
-		print('<input type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" id="ref" style="width:50px;height:30px"/>', file=output)
+		print('<input id="textbox" type="text" name="enter" class="enter" value="" onkeypress="jumpToImg(event,' + str(total) + ')" style="width:50px;height:30px"/>', file=output)
 		print('/' + str(total), file=output)
 		print('<body onload="startTime()">', file=output)
 		print('<div class="clock_pos" id="txt"></div>', file=output)
