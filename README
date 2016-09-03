@@ -1,2 +1,4 @@
-# HeartViewer
-An image viewer intended for reading manga and comics in your browser
+# HeartViewer #
+An image viewer intended for reading manga and comics in your browser!
+
+- Python Dependencies: pyunpack, tkinter, natsort, zipfile, rarfile
