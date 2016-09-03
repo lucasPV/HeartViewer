@@ -22,7 +22,7 @@ import zipfile, rarfile
 import tkinter.ttk as ttk
 from pyunpack import Archive
 from tkinter import messagebox, filedialog
-from natsort import realsorted
+from natsort import natsorted
 
 
 #Parameters
@@ -33,13 +33,13 @@ buttonFillColor      = '#C0C0C0'
 buttonFontColor      = '#000000'
 fontSize             = '3'
 selectionDir         = '/media/Dados/Manga/' 	#default directory on gui file selection
-appVersion           = '6.3'
+appVersion           = '6.4'
 copyright            = '2016 Heart Viewer'
-use7z                = True					#if you don't want to use the python extraction libs, use 7z instead (make sure you have it installed)
+use7z                = False				#if you don't want to use the python extraction libs, use 7z instead (make sure you have it installed)
 smartSorting         = True					#sort considering the numbers in the names
 showHeader           = True
 useZoom              = True
-zoomCursor           = True					#shows a magnifying glass when the cursor is above an image
+zoomCursor           = False				#shows a magnifying glass when the cursor is above an image
 useDefaultBrowser    = True					#if false, you can select the browser below
 browser              = 'firefox'			#if you are not in Linux, make sure that the browser is in the system PATH
 imgExtensions        = ('.png', '.jpg', '.jpeg', '.bmp', '.jpe', '.gif', '.tif')
@@ -247,7 +247,7 @@ if __name__ == "__main__":
 
 	#Select the desired sorting method
 	if smartSorting:
-		mySorted = realsorted
+		mySorted = natsorted
 	else:
 		mySorted = sorted
 
@@ -439,5 +439,5 @@ if __name__ == "__main__":
 	if useDefaultBrowser:
 		webbrowser.open(url)
 	else:
-		subprocess.Popen([browser, url])
-		#subprocess.Popen([browser, "-P", "heartViewer", url])
+		#subprocess.Popen([browser, url])
+		subprocess.Popen([browser, "-P", "heartViewer", url])
